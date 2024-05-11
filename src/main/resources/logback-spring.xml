@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+    <!-- property :: LOG_PREFIX  -->
+    <springProperty scope="context" name="LOG_PREFIX" source="spring.application.name" />
+    <!-- Console log Appender.-->
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>
+                [${LOG_PREFIX}] %d{yyyy-MM-dd HH:mm:ss} [%thread] [%-5level] %logger{36}:%line - %msg%n
+            </Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <!--
+        org.springframework.web 패키지 아래에서 발생하는 INFO 레벨 로그를 Console, File에 남깁니다.
+        root의 속성을 상속받지 않습니다.
+    -->
+    <logger name="org.springframework.web" level="INFO" />
+    <logger name="org.apache.ibatis" level="DEBUG" />
+    <logger name="org.thymeleaf" level="ERROR" additivity="false" />
+    <!-- Log4jdbc 옵션 설정 -->
+    <logger name="jdbc" level="INFO" additivity="false"/>
+    <!-- SQL문 만을 로그로 남긴다, PreparedStatement일 경우 관련된 argument 값으로 대체된 값으로 SQL 문이 보여진다. -->
+    <logger name="jdbc.sqlonly" level="INFO" additivity="true"/>
+    <!-- SQL문과 해당 SQL을 싱행시키는데 수행된 시간정보(millseconds)를 포함한다 -->
+    <logger name="jdbc.sqltiming" level="true">
+        <appender-ref ref="Console"/>
+    </logger>
+    <!-- mongodb java driver log level 설정 -->
+    <logger name="org.mongodb.driver" level="INFO">
+        <appender-ref ref="Console"/>
+    </logger>
+    <!--
+        ResultSet 을 제외한 모든 JDBC 호출 정보를 로그로 남김, 방대한 양의 로그가 쌓임
+        JDBC 문제를 추적해야 할 필요가 있는 경우를 제외하고 사용을 권장하지 않음
+     -->
+    <logger name="jdbc.audit" level="OFF" additivity="false"/>
+    <!-- ResultSet을 포함한 모든 JDBC 호출 정보를 로그에 남김, 방대한 양의 로그가 쌓임 -->
+    <logger name="jdbc.resultset" level="OFF" additivity="false" />
+    <!-- SQL 조회된 데이터를 TABLE 로그로 남긴다. -->
+    <logger name="jdbc.resultsettable" level="OFF">
+        <appender-ref ref="Console"/>
+    </logger>
+    <!-- 커넥션 open, close 이벤트 로그를 남긴다. -->
+    <logger name="com.zaxxer.hikari" level="TRACE" />
+    <logger name="com.zaxxer.hikari.HikariConfig" level="DEBUG"/>
+    <root>
+        <appender-ref ref="Console"/>
+    </root>
+</configuration>

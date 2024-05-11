@@ -1,0 +1,30 @@
+server:
+  port: 8081
+  error:
+    include-exception: true
+    include-stacktrace: always
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: metlife-hackertone-team01
+  servlet:
+    multipart:
+      max-request-size: -1
+      max-file-size: -1
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true #false로 변경
+        show_sql: true #false로 변경
+        use_sql_comments: true #false로 변경
+        default_batch_fetch_size: 1000
+    hibernate:
+      ddl-auto: none
+      generate-ddl: false

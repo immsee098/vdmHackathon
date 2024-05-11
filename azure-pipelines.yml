@@ -1,0 +1,81 @@
+trigger:
+- development
+
+variables:
+  group: be-metlife-team01
+  azureSubscription: 'metlife-it-hackathon(c78a7e0d-77b8-4816-b9f7-ac6d97d997be)'
+  vmImageName: 'ubuntu-latest'
+  webAppName: 'app-metlife-team01'
+  environmentName: 'myapp'
+
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs:
+  - job: GradlePackageAndPublishArtifacts
+    displayName: Gradle Package and Publish Artifacts
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: JavaToolInstaller@0
+      inputs:
+        versionSpec: '17'
+        jdkArchitectureOption: 'x64'
+        jdkSourceOption: 'PreInstalled'
+    - script: |
+        chmod +x ./gradlew
+      displayName: 'Set execute permission for Gradle Wrapper'
+    - script: |
+        echo "spring:
+          datasource:
+            url: $(DB_URL)
+            username: $(DB_USER)
+            password: $(DB_PASSWORD)" >> application.yml
+      displayName: 'Inject DB_CONNECTION_STRING into application.yml'
+    - task: Gradle@3
+      inputs:
+        gradleWrapperFile: 'gradlew'
+        tasks: 'clean build -x test'
+        javaHomeOption: 'JDKVersion'
+        gradleVersion: '8.6'
+    - task: CopyFiles@2
+      displayName: 'Copy Files to artifact staging directory'
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: '**/team01-0.0.1-SNAPSHOT.jar'
+        TargetFolder: $(Build.ArtifactStagingDirectory)
+    - upload: $(Build.ArtifactStagingDirectory)
+      artifact: drop
+
+- stage: Deploy
+  displayName: Deploy stage
+  dependsOn: Build
+  condition: succeeded()
+  jobs:
+    - deployment: DeployLinuxWebApp
+      displayName: Deploy Linux Web App
+      environment: $(environmentName)
+      pool:
+        vmImage: $(vmImageName)
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              - task: AzureMysqlDeployment@1
+                inputs:
+                  azureSubscription: $(azureSubscription)
+                  ServerName: 'sqldb-metlife-team01.mysql.database.azure.com'
+                  SqlUsername: 'team1@sqldb-metlife-team01'
+                  SqlPassword: 'new1234!!'
+                  TaskNameSelector: 'InlineSqlTask'
+                  SqlInline: |
+                    CREATE DATABASE chatmetlife;
+                    USE chatmetlife;
+                  IpDetectionMethod: 'AutoDetect'
+              - task: AzureWebApp@1
+                displayName: 'Azure Web App Deploy: myapp'
+                inputs:
+                  azureSubscription: $(azureSubscription)
+                  appType: webAppLinux
+                  appName: $(webAppName)
+                  package: '$(Pipeline.Workspace)/drop/**/team01-0.0.1-SNAPSHOT.jar'
