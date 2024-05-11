@@ -10,6 +10,5 @@ public interface ChatContentPort {
     @Async
     public void insertChatContent(ChatContentRequest chatContentRequest);
 
-    public CategoryDisplayResponse chatContentResponse(ChatContentRequest request, String header);
 
 }

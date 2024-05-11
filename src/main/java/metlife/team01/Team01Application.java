@@ -6,9 +6,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
- * @Project     : metlifehkt
+ * @Project     : vdmOccy
  * @FileName    : Team01Application.java
- * @Date        : 2024. 03. 22.
+ * @Date        : 2024. 05. 12.
  * @author      : immsee098@gmail.com
  * @description :
  */
