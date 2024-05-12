@@ -1,4 +1,4 @@
-package metlife.team01.application.domain.categoryDisplay.model;
+package metlife.team01.application.domain.postShow.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

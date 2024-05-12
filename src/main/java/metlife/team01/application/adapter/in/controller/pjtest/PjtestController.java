@@ -18,17 +18,6 @@ public class PjtestController {
     private final PjtestPort pjtestPort;
     private final MessageSourceAccessor messageSource;
 
-    @GetMapping
-    public ResponseMessage getTestList(@RequestBody PjtestRequest request){
-        OpenAiProvider provider = new OpenAiProvider();
-
-        return ResponseMessage.builder()
-                .item(provider.request("죽을 때까지 보장되는 보험 목록이 궁금해", "종신 보험/생명 보험"))
-//                        .item(pjtestPort.getTestList(request))
-                .statusCode(HttpStatus.OK.value())
-                .resultMessage(messageSource.getMessage("common.process.complete"))
-                .build();
-    }
 
     @PostMapping
     public ResponseMessage postTest(@RequestBody PjtestRequest request) {

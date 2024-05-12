@@ -1,9 +1,9 @@
-package metlife.team01.application.adapter.in.controller.categoryDisplay;
+package metlife.team01.application.adapter.in.controller.postShow;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import metlife.team01.application.adapter.in.controller.categoryDisplay.model.CategoryDisplayRequest;
-import metlife.team01.application.biz.categoryDisplay.port.in.CategoryDisplayPort;
+import metlife.team01.application.adapter.in.controller.postShow.model.CategoryDisplayRequest;
+import metlife.team01.application.biz.postShow.port.in.CategoryDisplayPort;
 import metlife.team01.application.util.ResponseMessage;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.HttpStatus;

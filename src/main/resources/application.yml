@@ -17,7 +17,7 @@ spring:
       max-request-size: -1
       max-file-size: -1
   datasource:
-    url: jdbc:mysql://localhost:3306/chatmetlife
+    url: jdbc:mysql://localhost:3306/occyvdm
     username: root # ${DB_USERNAME}
     password: 1234 # ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver

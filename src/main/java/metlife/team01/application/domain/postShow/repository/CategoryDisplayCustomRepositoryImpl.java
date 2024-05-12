@@ -1,14 +1,14 @@
-package metlife.team01.application.domain.categoryDisplay.repository;
+package metlife.team01.application.domain.postShow.repository;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import metlife.team01.application.adapter.in.controller.categoryDisplay.model.CategoryDisplayResponse;
-import metlife.team01.application.adapter.in.controller.categoryDisplay.model.QCategoryDisplayResponse;
+import metlife.team01.application.adapter.in.controller.postShow.model.CategoryDisplayResponse;
+import metlife.team01.application.adapter.in.controller.postShow.model.QCategoryDisplayResponse;
 
-import static metlife.team01.application.domain.categoryDisplay.model.QCategoryDisplayEntity.categoryDisplayEntity;
+import static metlife.team01.application.domain.postShow.model.QCategoryDisplayEntity.categoryDisplayEntity;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class CategoryDisplayCustomRepositoryImpl implements CategoryDisplayCusto
                 )
                 .from(categoryDisplayEntity)
                 .where(eqMenuLevel(menuLvl).and(categoryDisplayEntity.deleteYn.eq("N")))
-                .orderBy(categoryDisplayEntity.modifyAt.asc())
+//                .orderBy(categoryDisplayEntity.modifyAt.asc())
                 .fetch();
 
 
@@ -43,7 +43,7 @@ public class CategoryDisplayCustomRepositoryImpl implements CategoryDisplayCusto
                 .where(eqMenuLevel(menulvl)
                         .and(categoryDisplayEntity.parentCodeNum.eq(parentCodeNum))
                         .and(categoryDisplayEntity.deleteYn.eq("N")))
-                .orderBy(categoryDisplayEntity.modifyAt.asc())
+//                .orderBy(categoryDisplayEntity.modifyAt.asc())
                 .fetch();
 
         return result;

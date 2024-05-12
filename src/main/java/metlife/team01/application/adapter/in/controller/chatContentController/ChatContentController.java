@@ -17,15 +17,4 @@ public class ChatContentController {
     private final ChatContentPort chatContentPort;
     private final MessageSourceAccessor messageSource;
 
-    @PostMapping
-    public ResponseMessage chatCommunicate(@RequestBody ChatContentRequest request,
-                                           @RequestHeader("UUID_per") String UUID) {
-
-        return ResponseMessage.builder()
-                .item(chatContentPort.chatContentResponse(request, UUID))
-                .statusCode(HttpStatus.OK.value())
-                .resultMessage(messageSource.getMessage("common.process.complete"))
-                .build();
-    }
-
 }

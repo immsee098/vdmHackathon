@@ -2,16 +2,13 @@ package metlife.team01.application.biz.chatContent.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import metlife.team01.application.adapter.in.controller.categoryDisplay.model.CategoryDisplayResponse;
 import metlife.team01.application.adapter.in.controller.chatContentController.model.ChatContentRequest;
 import metlife.team01.application.biz.chatContent.port.in.ChatContentPort;
-import metlife.team01.application.domain.categoryDisplay.repository.CategoryDisplayJpaRepository;
+import metlife.team01.application.domain.postShow.repository.CategoryDisplayJpaRepository;
 import metlife.team01.application.domain.chatContent.model.ChatContentEntity;
 import metlife.team01.application.domain.chatContent.repository.ChatContentJpaRepository;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Slf4j
 @Service

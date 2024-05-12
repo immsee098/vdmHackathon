@@ -7,7 +7,7 @@ import lombok.val;
 import metlife.team01.application.adapter.in.controller.statistics.model.AllStatisticsResponse;
 import metlife.team01.application.adapter.in.controller.statistics.model.StatisticResponse;
 import metlife.team01.application.biz.statistics.port.in.StatisticsDisplayPort;
-import metlife.team01.application.domain.categoryDisplay.repository.CategoryDisplayJpaRepository;
+import metlife.team01.application.domain.postShow.repository.CategoryDisplayJpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

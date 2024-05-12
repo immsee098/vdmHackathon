@@ -1,9 +1,9 @@
-package metlife.team01.application.adapter.in.controller.categoryDisplay.model;
+package metlife.team01.application.adapter.in.controller.postShow.model;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import metlife.team01.application.domain.categoryDisplay.model.CategoryDisplayEntity;
+import metlife.team01.application.domain.postShow.model.CategoryDisplayEntity;
 
 import java.io.Serial;
 import java.io.Serializable;

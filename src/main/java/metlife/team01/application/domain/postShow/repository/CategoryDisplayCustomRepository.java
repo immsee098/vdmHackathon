@@ -1,6 +1,6 @@
-package metlife.team01.application.domain.categoryDisplay.repository;
+package metlife.team01.application.domain.postShow.repository;
 
-import metlife.team01.application.adapter.in.controller.categoryDisplay.model.CategoryDisplayResponse;
+import metlife.team01.application.adapter.in.controller.postShow.model.CategoryDisplayResponse;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
