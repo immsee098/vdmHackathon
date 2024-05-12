@@ -7,12 +7,10 @@ import metlife.team01.application.adapter.in.controller.postShow.model.*;
 import metlife.team01.application.biz.postShow.port.in.CategoryDisplayPort;
 import metlife.team01.application.biz.postShow.port.in.PostShowPort;
 import metlife.team01.application.domain.postShow.model.PostDetailShowEntity;
+import metlife.team01.application.domain.postShow.model.PostLikeViewEntity;
 import metlife.team01.application.domain.postShow.model.PostMasterShowEntity;
 import metlife.team01.application.domain.postShow.model.PostPasswordEntity;
-import metlife.team01.application.domain.postShow.repository.CategoryDisplayJpaRepository;
-import metlife.team01.application.domain.postShow.repository.PostDetailJpaRepository;
-import metlife.team01.application.domain.postShow.repository.PostMasterJpaRepository;
-import metlife.team01.application.domain.postShow.repository.PostPasswordJpaRepository;
+import metlife.team01.application.domain.postShow.repository.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -28,6 +26,7 @@ public class PostShowService implements PostShowPort {
     private final PostMasterJpaRepository postMasterJpaRepository;
     private final PostDetailJpaRepository postDetailJpaRepository;
     private final PostPasswordJpaRepository postPasswordJpaRepository;
+    private final PostLikeViewJpaRepository postLikeViewJpaRepository;
 
 
     @Override
@@ -58,6 +57,15 @@ public class PostShowService implements PostShowPort {
                             postId
                             , request.getPostContent()
                             , "N"
+                    )
+            );
+
+            // 좋아요/게시글 세팅
+            postLikeViewJpaRepository.save(
+                    new PostLikeViewEntity().saveEntity(
+                            postId
+                            , 0
+                            , 0
                     )
             );
 
