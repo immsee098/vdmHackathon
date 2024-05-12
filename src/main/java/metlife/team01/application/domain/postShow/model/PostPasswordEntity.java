@@ -27,7 +27,7 @@ public class PostPasswordEntity extends BaseTimeEntity implements Serializable {
     @Column(name = "post_id")
     private long postId;
 
-    @Column(name = "like_count")
+    @Column(name = "post_password")
     private String postPassword;
 
     public PostPasswordEntity saveEntity(long postId, String postPassword) {
