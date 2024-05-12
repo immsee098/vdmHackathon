@@ -39,6 +39,20 @@ public class PostShowService implements PostShowPort {
     }
 
     @Override
+    public PostShowDetailResponse getDetailPost(long postId) {
+        PostShowDetailResponse content = postDetailJpaRepository.getPostDetailInfo(postId);
+
+        if(content == null) {
+            return new PostShowDetailResponse();
+        }
+
+        PostLikeViewEntity entity = postLikeViewJpaRepository.findByPostId(postId);
+        content.setCounts(content, entity.getViewCount(), entity.getLikeCount());
+
+        return content;
+    }
+
+    @Override
     @Transactional
     public long insertNewPost(PostShowDetailRequest request) {
         try {
@@ -88,7 +102,7 @@ public class PostShowService implements PostShowPort {
     @Override
     public long updatePost(PostShowDetailRequest request) {
         try {
-            PostShowDetailResponse response = postDetailJpaRepository.getPostDetailInfo(request);
+            PostShowDetailResponse response = postDetailJpaRepository.getPostDetailInfo(request.getPostId());
 
             if(response == null) {
                 return -1;
@@ -118,6 +132,5 @@ public class PostShowService implements PostShowPort {
             return -1;
         }
     }
-
 
 }

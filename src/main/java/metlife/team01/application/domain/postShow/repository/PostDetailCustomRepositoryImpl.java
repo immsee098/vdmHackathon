@@ -28,7 +28,7 @@ public class PostDetailCustomRepositoryImpl implements PostDetailCustomRepositor
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public PostShowDetailResponse getPostDetailInfo(PostShowDetailRequest request) {
+    public PostShowDetailResponse getPostDetailInfo(long postId) {
         return jpaQueryFactory
                 .select(new QPostShowDetailResponse(
                         QPostDetailShowEntity.postDetailShowEntity
@@ -36,7 +36,7 @@ public class PostDetailCustomRepositoryImpl implements PostDetailCustomRepositor
                 .from(postMasterShowEntity, QPostDetailShowEntity.postDetailShowEntity)
                 .where(postMasterShowEntity.postId.eq(QPostDetailShowEntity.postDetailShowEntity.postId)
                         .and(postMasterShowEntity.dltYn.eq("N"))
-                        .and(postMasterShowEntity.postId.eq(request.getPostId())))
+                        .and(postMasterShowEntity.postId.eq(postId)))
                 .fetchOne();
     }
 }

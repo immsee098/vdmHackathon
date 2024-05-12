@@ -11,6 +11,6 @@ import java.util.Optional;
 @Repository
 public interface PostDetailCustomRepository {
 
-    public PostShowDetailResponse getPostDetailInfo(PostShowDetailRequest request);
+    public PostShowDetailResponse getPostDetailInfo(long postId);
 
 }

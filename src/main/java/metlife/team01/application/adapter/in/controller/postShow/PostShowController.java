@@ -38,6 +38,17 @@ public class PostShowController {
                 .build();
     }
 
+    @GetMapping(value = "/id/{id}")
+    public ResponseMessage getPostDetail(
+            @PathVariable Integer id
+    ) {
+        return ResponseMessage.builder()
+                .item(postShowPort.getDetailPost(id))
+                .statusCode(HttpStatus.OK.value())
+                .resultMessage(messageSource.getMessage("common.process.complete"))
+                .build();
+    }
+
     @PostMapping
     public ResponseMessage insertNewPost(@RequestBody PostShowDetailRequest request) {
 

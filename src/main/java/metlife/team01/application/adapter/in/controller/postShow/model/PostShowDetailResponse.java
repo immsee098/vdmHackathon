@@ -39,7 +39,19 @@ public class PostShowDetailResponse implements Serializable {
         this.postTitle = entity.getPostTitle();
         this.postContent = detailShowEntity.getPostContent();
         this.dltYn = entity.getDltYn();
-//        this.view = view;
-//        this.like = like;
+        this.crtdDate = entity.getCrtdDate();
+    }
+
+    public PostShowDetailResponse setCounts(PostShowDetailResponse response, int view, int like) {
+        this.postDetailId = response.getPostDetailId();
+        this.postId = response.getPostId();
+        this.postTitle = response.getPostTitle();
+        this.postContent = response.getPostContent();
+        this.dltYn = response.getDltYn();
+        this.crtdDate = response.getCrtdDate();
+        this.view = view;
+        this.like = like;
+
+        return this;
     }
 }

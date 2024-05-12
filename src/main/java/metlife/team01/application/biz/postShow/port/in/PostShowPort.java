@@ -10,6 +10,8 @@ public interface PostShowPort {
 
     public Page<PostShowMasterResponse> getPostList(String ordrType, Pageable pageable);
 
+    public PostShowDetailResponse getDetailPost(long postId);
+
     public long insertNewPost(PostShowDetailRequest request);
 
     public long updatePost(PostShowDetailRequest request);

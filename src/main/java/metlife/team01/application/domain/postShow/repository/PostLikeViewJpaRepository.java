@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PostLikeViewJpaRepository extends JpaRepository<PostLikeViewEntity, Long> {
+    PostLikeViewEntity findByPostId(long postId);
 }
