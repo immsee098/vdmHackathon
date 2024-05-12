@@ -33,15 +33,13 @@ public class PostShowDetailResponse implements Serializable {
     private int like;
 
     @QueryProjection
-
-    public PostShowDetailResponse(PostDetailShowEntity detailShowEntity) {
+    public PostShowDetailResponse(PostDetailShowEntity detailShowEntity, PostMasterShowEntity entity) {
         this.postDetailId = detailShowEntity.getPostDetailId();
         this.postId = detailShowEntity.getPostId();
-        this.postTitle = postTitle;
-        this.postContent = postContent;
-        this.crtdDate = crtdDate;
-        this.dltYn = dltYn;
-        this.view = view;
-        this.like = like;
+        this.postTitle = entity.getPostTitle();
+        this.postContent = detailShowEntity.getPostContent();
+        this.dltYn = entity.getDltYn();
+//        this.view = view;
+//        this.like = like;
     }
 }

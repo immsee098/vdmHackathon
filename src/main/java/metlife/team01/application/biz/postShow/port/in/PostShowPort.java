@@ -12,4 +12,6 @@ public interface PostShowPort {
 
     public long insertNewPost(PostShowDetailRequest request);
 
+    public long updatePost(PostShowDetailRequest request);
+
 }

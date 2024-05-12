@@ -41,7 +41,6 @@ public class PostShowService implements PostShowPort {
     @Override
     @Transactional
     public long insertNewPost(PostShowDetailRequest request) {
-
         try {
             // 마스터 정보
             long postId = postMasterJpaRepository.save(
@@ -81,6 +80,40 @@ public class PostShowService implements PostShowPort {
 
             return postId;
 
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    @Override
+    public long updatePost(PostShowDetailRequest request) {
+        try {
+            PostShowDetailResponse response = postDetailJpaRepository.getPostDetailInfo(request);
+
+            if(response == null) {
+                return -1;
+            }
+
+            // master
+            postMasterJpaRepository.save(
+                    new PostMasterShowEntity(
+                            response.getPostId()
+                            , request.getPostTitle() != null ? request.getPostTitle() : response.getPostTitle()
+                            , request.getDltYn() != null ? request.getDltYn() : response.getDltYn()
+                    )
+            );
+
+            // detail
+            postDetailJpaRepository.save(
+                    new PostDetailShowEntity(
+                            response.getPostDetailId()
+                            , response.getPostId()
+                            , request.getPostContent() != null ? request.getPostContent() : response.getPostContent()
+                            , request.getDltYn() != null ? request.getDltYn() : response.getDltYn()
+                    )
+            );
+
+            return response.getPostId();
         } catch (Exception e) {
             return -1;
         }

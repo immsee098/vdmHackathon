@@ -32,7 +32,7 @@ public class PostShowController {
         Pageable pageable = PageRequest.of(page, size);
 
         return ResponseMessage.builder()
-                .item(postShowPort.getPostList(ordr, pageable))
+                .item(postShowPort.getPostList(ordr, pageable).getContent())
                 .statusCode(HttpStatus.OK.value())
                 .resultMessage(messageSource.getMessage("common.process.complete"))
                 .build();
@@ -43,6 +43,16 @@ public class PostShowController {
 
         return ResponseMessage.builder()
                 .item(postShowPort.insertNewPost(request))
+                .statusCode(HttpStatus.OK.value())
+                .resultMessage(messageSource.getMessage("common.process.complete"))
+                .build();
+    }
+
+    @PostMapping("/modify")
+    public ResponseMessage updatePost(@RequestBody PostShowDetailRequest request) {
+
+        return ResponseMessage.builder()
+                .item(postShowPort.updatePost(request))
                 .statusCode(HttpStatus.OK.value())
                 .resultMessage(messageSource.getMessage("common.process.complete"))
                 .build();
