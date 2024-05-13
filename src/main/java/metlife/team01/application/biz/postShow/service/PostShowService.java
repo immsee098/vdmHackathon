@@ -41,10 +41,20 @@ public class PostShowService implements PostShowPort {
     @Override
     public PostShowDetailResponse getDetailPost(long postId) {
         PostShowDetailResponse content = postDetailJpaRepository.getPostDetailInfo(postId);
+        PostLikeViewResponse likeView = postLikeViewJpaRepository.getPostLikeViewInfo(postId);
 
         if(content == null) {
             return new PostShowDetailResponse();
         }
+
+        postLikeViewJpaRepository.save(
+                new PostLikeViewEntity(
+                        likeView.getVlId()
+                        ,likeView.getPostId()
+                        , likeView.getLikeCount()
+                        ,likeView.getViewCount() + 1
+                )
+        );
 
         PostLikeViewEntity entity = postLikeViewJpaRepository.findByPostId(postId);
         content.setCounts(content, entity.getViewCount(), entity.getLikeCount());
