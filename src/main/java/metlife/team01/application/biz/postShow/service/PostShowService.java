@@ -133,4 +133,29 @@ public class PostShowService implements PostShowPort {
         }
     }
 
+    @Override
+    public long updateLike(PostLikeViewRequest request){
+
+        try {
+            PostLikeViewResponse response = postLikeViewJpaRepository.getPostLikeViewInfo(request.getPostId());
+
+            if(response == null) {
+                return -1;
+            }
+
+            postLikeViewJpaRepository.save(
+                    new PostLikeViewEntity(
+                            response.getVlId()
+                            , response.getPostId()
+                            , request.getLikeCount()
+                            , response.getViewCount()
+                    )
+            );
+
+            return response.getPostId();
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
 }

@@ -2,9 +2,7 @@ package metlife.team01.application.adapter.in.controller.postShow;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import metlife.team01.application.adapter.in.controller.postShow.model.CategoryDisplayRequest;
-import metlife.team01.application.adapter.in.controller.postShow.model.PostShowDetailRequest;
-import metlife.team01.application.adapter.in.controller.postShow.model.PostShowMasterRequest;
+import metlife.team01.application.adapter.in.controller.postShow.model.*;
 import metlife.team01.application.biz.postShow.port.in.CategoryDisplayPort;
 import metlife.team01.application.biz.postShow.port.in.PostShowPort;
 import metlife.team01.application.util.ResponseMessage;
@@ -69,4 +67,12 @@ public class PostShowController {
                 .build();
     }
 
+    @PutMapping("/like")
+    public ResponseMessage likePost(@RequestBody PostLikeViewRequest request) {
+        return ResponseMessage.builder()
+                .item(postShowPort.updateLike(request))
+                .statusCode(HttpStatus.OK.value())
+                .resultMessage(messageSource.getMessage("common.process.complete"))
+                .build();
+    }
 }

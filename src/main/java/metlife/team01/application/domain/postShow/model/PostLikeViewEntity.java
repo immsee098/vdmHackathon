@@ -33,6 +33,13 @@ public class PostLikeViewEntity extends BaseTimeEntity implements Serializable {
     @Column(name = "view_count")
     private int viewCount;
 
+    public PostLikeViewEntity(long vlId, long postId, int likeCount, int viewCount) {
+        this.vlId = vlId;
+        this.postId = postId;
+        this.likeCount = likeCount;
+        this.viewCount = viewCount;
+    }
+
     public PostLikeViewEntity saveEntity(long postId, int likeCount, int viewCount) {
         this.postId = postId;
         this.likeCount = likeCount;
@@ -40,10 +47,5 @@ public class PostLikeViewEntity extends BaseTimeEntity implements Serializable {
 
         return this;
     }
-    public PostLikeViewEntity(long vlId, long postId, int likeCount, int viewCount) {
-        this.vlId = vlId;
-        this.postId = postId;
-        this.likeCount = likeCount;
-        this.viewCount = viewCount;
-    }
+
 }
